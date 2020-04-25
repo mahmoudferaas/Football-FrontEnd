@@ -14,7 +14,7 @@ export const environment = {
   production: false,
   hmr: true,
   version: env.npm_package_version + '-dev',
-  serverUrl: 'https://localhost:44398/',
+  serverUrl: 'http://mahmoudferaas-001-site1.atempurl.com/',
   defaultLanguage: 'en-US',
   supportedLanguages: ['en-US'],
 };
