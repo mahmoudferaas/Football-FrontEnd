@@ -1,0 +1,85 @@
+<div class="container">
+  <mat-card>
+    <mat-card-content>
+      <mat-card-title translate>Add Team</mat-card-title>
+      <mat-card-subtitle>
+        <!-- <app-loader [isLoading]="isLoading" size="1.5"></app-loader> -->
+        <!-- <q [hidden]="isLoading">{{ quote }}</q> -->
+        <form [formGroup]="addTeamForm" (ngSubmit)="onSubmit()">
+          <mat-form-field class="example-full-width">
+            <mat-label>Team Name</mat-label>
+            <input matInput formControlName="name" />
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Team Country</mat-label>
+            <input matInput formControlName="country" />
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Team Foundation Date</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="foundationDate" />
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Team Coach Name</mat-label>
+            <input matInput formControlName="coachName" />
+          </mat-form-field>
+
+          <div class="players-section">
+            <mat-label>Team Logo</mat-label>
+            <app-material-file-upload (complete)="onFileComplete($event, 'logoImage')"></app-material-file-upload>
+          </div>
+
+          <div class="players-section">
+            <div class="float-left">
+              <h4>Team Players</h4>
+            </div>
+            <div class="float-right">
+              <button
+                mat-icon-button
+                color="primary"
+                aria-label="Example icon button with a heart icon"
+                (click)="addTeamPlayer()"
+              >
+                <mat-icon>add</mat-icon>
+              </button>
+            </div>
+          </div>
+
+          <div formArrayName="players">
+            <div *ngFor="let player of players.controls; let i = index" [formGroupName]="i">
+              <mat-form-field class="example-full-width">
+                <mat-label>Player Name</mat-label>
+                <input matInput formControlName="name" />
+              </mat-form-field>
+
+              <mat-form-field class="example-full-width">
+                <mat-label>Player Nationality</mat-label>
+                <input matInput formControlName="nationality" />
+              </mat-form-field>
+
+              <mat-form-field>
+                <mat-label>Player Date Of Birth</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="dateOfBirth" />
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+
+              <div class="players-section">
+                <mat-label>Player Image</mat-label>
+                <app-material-file-upload (complete)="onPlayerFileComplete($event, i)"></app-material-file-upload>
+              </div>
+            </div>
+          </div>
+
+          <div class="example-button-row">
+            <button mat-button color="primary">Create</button>
+          </div>
+        </form>
+      </mat-card-subtitle>
+    </mat-card-content>
+  </mat-card>
+</div>
